@@ -8,12 +8,22 @@ import javax.persistence.Id;
 public class Cavia {
 
 
-    String color;
-    String weight;
-    String gender;
+    private String color;
+    private String weight;
+    private String gender;
 
     @Id
-    Integer caviaCategory;
+    CaviaCategory caviaCategory;
+
+
+
+    public Cavia(CaviaCategory caviaCategory) {
+        this.caviaCategory = caviaCategory;
+    }
+
+    public void setCaviaCategory(CaviaCategory caviaCategory) {
+        this.caviaCategory = caviaCategory;
+    }
 
     public String getColor() {
         return color;
@@ -39,11 +49,5 @@ public class Cavia {
         this.gender = gender;
     }
 
-    public Integer getCaviaCategory() {
-        return caviaCategory;
-    }
 
-    public void setCaviaCategory(Integer caviaCategory) {
-        this.caviaCategory = caviaCategory;
-    }
 }

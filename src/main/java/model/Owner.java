@@ -3,15 +3,35 @@ package model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Owner {
 
 
-    @Id
-    String telephoneNumber;
-    String adress;
 
+    private String telephoneNumber;
+    private String adress;
+
+    @Id
+    @OneToOne
+    private Cavia cavia;
+
+
+    public Owner() {
+    }
+
+    public Owner(Cavia cavia) {
+        this.cavia = cavia;
+    }
+
+    public Cavia getCavia() {
+        return cavia;
+    }
+
+    public void setCavia(Cavia cavia) {
+        this.cavia = cavia;
+    }
 
     public String getAdress() {
         return adress;

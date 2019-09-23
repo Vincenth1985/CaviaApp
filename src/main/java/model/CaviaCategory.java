@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class CaviaCategory {
 
     @Id
-    String name;
+    private String name;
 
     public String getName() {
         return name;
