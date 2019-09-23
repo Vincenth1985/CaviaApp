@@ -1,11 +1,18 @@
 package model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Cavia {
 
 
     String color;
     String weight;
     String gender;
+
+    @Id
     Integer caviaCategory;
 
     public String getColor() {

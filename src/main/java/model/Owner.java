@@ -1,9 +1,16 @@
 package model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Owner {
 
-    String adress;
+
+    @Id
     String telephoneNumber;
+    String adress;
 
 
     public String getAdress() {
