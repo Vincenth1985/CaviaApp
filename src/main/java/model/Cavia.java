@@ -1,28 +1,41 @@
 package model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cavia {
 
 
+    @Id
+    @GeneratedValue
+    private Integer caviaId;
     private String color;
     private String weight;
     private String gender;
 
-    @Id
+//    @OneToOne
+//    private Owner owner;
+
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     CaviaCategory caviaCategory;
 
 
-
-    public Cavia(CaviaCategory caviaCategory) {
-        this.caviaCategory = caviaCategory;
+    public CaviaCategory getCaviaCategory() {
+        return caviaCategory;
     }
 
     public void setCaviaCategory(CaviaCategory caviaCategory) {
         this.caviaCategory = caviaCategory;
+    }
+
+    public Integer getCaviaId() {
+        return caviaId;
+    }
+
+    public void setCaviaId(Integer caviaId) {
+        this.caviaId = caviaId;
     }
 
     public String getColor() {

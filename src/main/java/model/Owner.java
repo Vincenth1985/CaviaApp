@@ -1,29 +1,20 @@
 package model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Owner {
 
 
-
+    @Id
+    @GeneratedValue
+    private Integer ownerId;
     private String telephoneNumber;
     private String adress;
 
-    @Id
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Cavia cavia;
-
-
-    public Owner() {
-    }
-
-    public Owner(Cavia cavia) {
-        this.cavia = cavia;
-    }
 
     public Cavia getCavia() {
         return cavia;
@@ -31,6 +22,14 @@ public class Owner {
 
     public void setCavia(Cavia cavia) {
         this.cavia = cavia;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getAdress() {
