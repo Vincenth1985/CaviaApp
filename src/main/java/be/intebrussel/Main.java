@@ -5,51 +5,66 @@ import model.CaviaCategory;
 import model.Owner;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("datasourcelocal");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("datasourcelocal");
+        EntityManager em = emf.createEntityManager();
 
 
-        entityManager.getTransaction();
+        em.getTransaction();
 
-        EntityTransaction tx = entityManager.getTransaction();
+        EntityTransaction tx = em.getTransaction();
 
         Owner owner = new Owner();
-        owner.setTelephoneNumber("0486589816");
-        owner.setAdress("Rue de la Semence 39 1080");
+        owner.setAdress(" Rue de La Semence nr39/9 1080 ");
+        owner.setTelephoneNumber(" 0486/589816 ");
+
+        Owner owner2 = new Owner();
+        owner2.setAdress(" Rue de laiterie nr10 1060 ");
+        owner2.setTelephoneNumber(" 02/4101794 ");
 
         Cavia cavia = new Cavia();
-        cavia.setWeight("1kg");
-        cavia.setColor("Bruin");
         cavia.setGender("Male");
+        cavia.setColor("Brown");
+        cavia.setWeight("1kg");
+        cavia.setBirthDay(LocalDate.now());
+
+        Cavia cavia2 = new Cavia();
+        cavia2.setGender("Female");
+        cavia2.setColor("White");
+        cavia2.setWeight("0,5kg");
+        cavia2.setBirthDay(LocalDate.now());
+
 
         CaviaCategory caviaCategory = new CaviaCategory();
         caviaCategory.setName("Hamster");
+        caviaCategory.addCavia(cavia);
+
+        CaviaCategory caviaCategory2 = new CaviaCategory();
+        caviaCategory2.setName("Rats");
+        caviaCategory2.addCavia(cavia2);
 
         owner.setCavia(cavia);
-        cavia.setCaviaCategory(caviaCategory);
+        owner2.setCavia(cavia2);
+
+        tx.begin();
+        em.persist(owner);
+        tx.commit();
+
+        tx.begin();
+        em.persist(owner2);
+        tx.commit();
 
 
         tx.begin();
-
-        entityManager.persist(owner);
-
+        owner.setCavia(em.find(Cavia.class,1));
         tx.commit();
 
-        Cavia cavia1 = new Cavia();
-        entityManager.persist(cavia1);
-        Owner owner1 = new Owner();
-        owner1.setCavia(cavia1);
-
-
-        tx.begin();
-        tx.commit();
-
-        entityManager.close();
-        entityManagerFactory.close();
+        em.close();
+        emf.close();
 
     }
 }

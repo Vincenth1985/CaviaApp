@@ -2,25 +2,34 @@ package model;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Cavia {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer caviaId;
     private String color;
     private String weight;
     private String gender;
 
-//    @OneToOne
-//    private Owner owner;
+
+    private LocalDate birthDay;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    CaviaCategory caviaCategory;
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private CaviaCategory caviaCategory;
 
+
+    public LocalDate getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
 
     public CaviaCategory getCaviaCategory() {
         return caviaCategory;
@@ -61,6 +70,8 @@ public class Cavia {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+
 
 
 }

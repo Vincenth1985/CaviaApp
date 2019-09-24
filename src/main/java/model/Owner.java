@@ -8,12 +8,12 @@ public class Owner {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ownerId;
     private String telephoneNumber;
     private String adress;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Cavia cavia;
 
     public Cavia getCavia() {
