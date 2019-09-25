@@ -19,6 +19,7 @@ public class Cavia {
     private LocalDate birthDay;
 
 
+
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private CaviaCategory caviaCategory;
 

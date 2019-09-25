@@ -8,13 +8,14 @@ import java.util.List;
 @Entity
 public class CaviaCategory {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer CategoryId;
     private String name;
 
     //one category to many cavias.
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "caviaCategory")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "caviaCategory")
     private List<Cavia> cavias = new ArrayList<>();
 
 
@@ -23,8 +24,9 @@ public class CaviaCategory {
     }
 
     public void setCavias(List<Cavia> cavias) {
-        cavias = cavias;
+        this.cavias = cavias;
     }
+
 
     public Integer getCategoryId() {
         return CategoryId;

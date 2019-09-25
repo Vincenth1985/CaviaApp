@@ -6,6 +6,8 @@ import model.Owner;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,28 +43,18 @@ public class Main {
 
         CaviaCategory caviaCategory = new CaviaCategory();
         caviaCategory.setName("Hamster");
-        caviaCategory.addCavia(cavia);
 
-        CaviaCategory caviaCategory2 = new CaviaCategory();
-        caviaCategory2.setName("Rats");
-        caviaCategory2.addCavia(cavia2);
+        caviaCategory.addCavia(cavia);
+        caviaCategory.addCavia(cavia2);
 
         owner.setCavia(cavia);
         owner2.setCavia(cavia2);
 
         tx.begin();
         em.persist(owner);
-        em.flush();
-        //tx.commit();
-
-        //tx.begin();
         em.persist(owner2);
-        // tx.commit();
-        em.flush();
+        tx.commit();
 
-//
-//        tx.begin();
-//        tx.commit();
 
         em.close();
         emf.close();
