@@ -52,16 +52,17 @@ public class Main {
 
         tx.begin();
         em.persist(owner);
-        tx.commit();
+        em.flush();
+        //tx.commit();
 
-        tx.begin();
+        //tx.begin();
         em.persist(owner2);
-        tx.commit();
+        // tx.commit();
+        em.flush();
 
-
-        tx.begin();
-        owner.setCavia(em.find(Cavia.class,1));
-        tx.commit();
+//
+//        tx.begin();
+//        tx.commit();
 
         em.close();
         emf.close();
